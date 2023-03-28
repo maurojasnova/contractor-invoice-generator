@@ -7,8 +7,9 @@ import handlers from 'handlebars';
 export default async (req, res) => {
   // extract the customer name from the req.body object
   // and also set a default name with the logical operator
-  const { name } = JSON.parse(req.body);
+  const { name, email } = JSON.parse(req.body);
   const customerName = name || 'John Doe';
+  const customerEmail = email || 'email@example.com';
 
   try {
     // read our invoice-template.html file using node fs module
@@ -16,7 +17,7 @@ export default async (req, res) => {
 
     // compile the file with handlebars and inject the customerName variable
     const template = handlers.compile(`${file}`);
-    const html = template({ customerName });
+    const html = template({ customerName, customerEmail });
 
     // simulate a chrome browser with puppeteer and navigate to a new page
     const browser = await puppeteer.launch();

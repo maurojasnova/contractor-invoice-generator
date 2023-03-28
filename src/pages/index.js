@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [name, setName] = useState("Customer");
+  let email;
   // container function to generate the Invoice
   const generateInvoice = (e) => {
     e.preventDefault();
@@ -11,11 +12,13 @@ export default function Home() {
     const fetchData = async () => {
       const data = await fetch("http://localhost:3000/api/generate-invoice", {
         method: "POST",
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, email }),
       });
       // convert the response into an array Buffer
       return data.arrayBuffer();
     };
+
+    
 
     // convert the buffer into an object URL
     const saveAsPDF = async () => {
@@ -51,6 +54,12 @@ export default function Home() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+            <label htmlFor="email">Enter Email</label>
+            <input
+              id="email"
+              type="text"
+              value={email}
             />
           </div>
 
