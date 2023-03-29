@@ -3,8 +3,12 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const [name, setName] = useState("Customer");
-  let email;
+  const [formValue, setFormValue] = useState({ name: "", email: "" });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setFormValue({...formValue, [name]:value})
+  }
   // container function to generate the Invoice
   const generateInvoice = (e) => {
     e.preventDefault();
@@ -12,13 +16,11 @@ export default function Home() {
     const fetchData = async () => {
       const data = await fetch("http://localhost:3000/api/generate-invoice", {
         method: "POST",
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ name: formValue.name, email: formValue.email}),
       });
       // convert the response into an array Buffer
       return data.arrayBuffer();
     };
-
-    
 
     // convert the buffer into an object URL
     const saveAsPDF = async () => {
@@ -40,30 +42,35 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Hello {name} 👋</h1>
+        <h1 className={styles.title}>Hello {formValue.name} 👋</h1>
 
         <p className={styles.description}>
           Fill the form below to generate your invoice
         </p>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={generateInvoice}>
           <div className={styles.field}>
             <label htmlFor="name">Enter Name</label>
             <input
               id="name"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name="name"
+              value={formValue.name}
+              onChange={ handleInput }
             />
             <label htmlFor="email">Enter Email</label>
             <input
               id="email"
               type="text"
-              value={email}
+              name="email"
+              value={formValue.email}
+              onChange={ handleInput }
             />
           </div>
 
-          <button onClick={generateInvoice} className={styles.button}>Download Invoice</button>
+          <button className={styles.button}>
+            Download Invoice
+          </button>
         </form>
       </main>
     </div>
