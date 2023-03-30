@@ -3,12 +3,16 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const [formValue, setFormValue] = useState({ name: "", email: "" });
+  const [formValue, setFormValue] = useState({
+    name: "",
+    email: "",
+    price: "",
+  });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    setFormValue({...formValue, [name]:value})
-  }
+    setFormValue({ ...formValue, [name]: value });
+  };
   // container function to generate the Invoice
   const generateInvoice = (e) => {
     e.preventDefault();
@@ -16,7 +20,11 @@ export default function Home() {
     const fetchData = async () => {
       const data = await fetch("http://localhost:3000/api/generate-invoice", {
         method: "POST",
-        body: JSON.stringify({ name: formValue.name, email: formValue.email}),
+        body: JSON.stringify({
+          name: formValue.name,
+          email: formValue.email,
+          price: formValue.price,
+        }),
       });
       // convert the response into an array Buffer
       return data.arrayBuffer();
@@ -56,7 +64,7 @@ export default function Home() {
               type="text"
               name="name"
               value={formValue.name}
-              onChange={ handleInput }
+              onChange={handleInput}
             />
             <label htmlFor="email">Enter Email</label>
             <input
@@ -64,13 +72,19 @@ export default function Home() {
               type="text"
               name="email"
               value={formValue.email}
-              onChange={ handleInput }
+              onChange={handleInput}
+            />
+            <label htmlFor="email">Enter Amount Due</label>
+            <input
+              id="price"
+              type="text"
+              name="price"
+              value={formValue.price}
+              onChange={handleInput}
             />
           </div>
 
-          <button className={styles.button}>
-            Download Invoice
-          </button>
+          <button className={styles.button}>Download Invoice</button>
         </form>
       </main>
     </div>

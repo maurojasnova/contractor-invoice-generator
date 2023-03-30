@@ -113,12 +113,16 @@
           <table>
             <tr>
               <td class="title">
-                <img src="./accusentry.png" style="height: 100px;">
+                <svg width="100" max-width="300" height="86" viewBox="0 0 86 86" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M71.5413 30.5336C71.6237 29.9101 71.6667 29.2866 71.6667 28.6667C71.6667 20.1419 63.9876 13.3014 55.4664 14.4588C52.9832 10.0405 48.2532 7.16669 43 7.16669C37.7468 7.16669 33.0168 10.0405 30.5336 14.4588C21.9945 13.3014 14.3333 20.1419 14.3333 28.6667C14.3333 29.2866 14.3763 29.9101 14.4588 30.5336C10.0405 33.0204 7.16667 37.7504 7.16667 43C7.16667 48.2496 10.0405 52.9796 14.4588 55.4664C14.3761 56.0853 14.3342 56.709 14.3333 57.3334C14.3333 65.8581 21.9945 72.6808 30.5336 71.5413C33.0168 75.9595 37.7468 78.8334 43 78.8334C48.2532 78.8334 52.9832 75.9595 55.4664 71.5413C63.9876 72.6808 71.6667 65.8581 71.6667 57.3334C71.6667 56.7134 71.6237 56.0899 71.5413 55.4664C75.9595 52.9796 78.8333 48.2496 78.8333 43C78.8333 37.7504 75.9595 33.0204 71.5413 30.5336ZM39.2554 58.824L26.1153 45.5155L31.218 40.4845L39.3056 48.676L54.8107 33.2892L59.856 38.3775L39.2554 58.824Z"
+                    fill="#58CAEA" />
+                </svg>
               </td>
               <td>
-                Invoice #: 123<br>
-                Created: July 2, 2018<br>
-                Due: August 1, 2018
+                Created: {{todayDate}}<br>
+                Due: February 1, 2020
               </td>
             </tr>
           </table>
@@ -143,6 +147,26 @@
           </table>
         </td>
       </tr>
+
+      <tr class="heading">
+        <td>
+          Payment Method
+        </td>
+
+        <td>
+          Amount
+        </td>
+      </tr>
+
+      <tr class="details">
+        <td>
+          Transfer to Bank Account
+        </td>
+
+        <td>
+          {{customerPrice}}
+        </td>
+      </tr>
       
       <tr class="heading">
         <td>
@@ -155,35 +179,17 @@
       
       <tr class="item">
         <td>
-          Website design
+          Professional services
         </td>
         <td>
-          $300.00
-        </td>
-      </tr>
-      
-      <tr class="item">
-        <td>
-          Hosting (3 months)
-        </td>
-        <td>
-          $75.00
-        </td>
-      </tr>
-      
-      <tr class="item last">
-        <td>
-          Domain name (1 year)
-        </td>
-        <td>
-          $10.00
+          {{customerPrice}}
         </td>
       </tr>
       
       <tr class="total">
         <td></td>
         <td>
-           Total: $385.00
+          {{customerPrice}}
         </td>
       </tr>
     </table>
