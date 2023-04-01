@@ -7,6 +7,7 @@ export default function Home() {
     name: "",
     email: "",
     price: "",
+    number: ""
   });
 
   const handleInput = (e) => {
@@ -24,6 +25,7 @@ export default function Home() {
           name: formValue.name,
           email: formValue.email,
           price: formValue.price,
+          number: formValue.number,
         }),
       });
       // convert the response into an array Buffer
@@ -58,6 +60,14 @@ export default function Home() {
 
         <form className={styles.form} onSubmit={generateInvoice}>
           <div className={styles.field}>
+          <label htmlFor="number">Enter Invoice Number</label>
+            <input
+              id="number"
+              type="text"
+              name="number"
+              value={formValue.number}
+              onChange={handleInput}
+            />
             <label htmlFor="name">Enter Name</label>
             <input
               id="name"

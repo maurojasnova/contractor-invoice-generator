@@ -7,11 +7,12 @@ import handlers from "handlebars";
 export default async (req, res) => {
   // extract the customer name from the req.body object
   // and also set a default name with the logical operator
-  const { name, email, price } = JSON.parse(req.body);
+  const { name, email, price, number } = JSON.parse(req.body);
   const customerName = name || "John Doe";
   const customerEmail = email || "email@example.com";
   const todayDate = new Date().toLocaleDateString();
-  const customerPrice = price || "Undefied";
+  const customerPrice = price || "Undefined";
+  const invoiceNumber = number || "Undefined";
 
   try {
     // read our invoice-template.html file using node fs module
@@ -24,6 +25,7 @@ export default async (req, res) => {
       customerEmail,
       todayDate,
       customerPrice,
+      invoiceNumber
     });
 
     // simulate a chrome browser with puppeteer and navigate to a new page
